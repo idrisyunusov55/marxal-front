@@ -1,0 +1,127 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 13vh;
+    position: absolute;
+    z-index: 3;
+    background-color: rgba(0, 0, 0, 0.578);
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        width: 90%;
+
+        .logo {
+            cursor: pointer;
+
+            img {
+                width: 80px;
+                height: 80px;
+            }
+        }
+
+        .first,
+        .second {
+            nav {
+                ul {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 30px;
+
+                    li {
+                        list-style: none;
+
+                        a {
+                            text-decoration: none;
+                            color: white;
+                            cursor: pointer;
+                            font-size: 15px;
+                            line-height: 13px;
+                            font-family: "Afacad Flux", serif;
+                        }
+                    }
+                }
+            }
+        }
+
+        .bars {
+            display: none;
+        }
+    }
+}
+
+.mobileMenu {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 250px;
+    height: 100vh;
+    z-index: 5;
+    padding-top: 50px;
+    box-shadow: -3px 0 10px rgba(0, 0, 0, 0.5);
+
+    ul {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding-left: 20px;
+
+        li {
+            list-style: none;
+
+            a {
+                text-decoration: none;
+                color: white;
+                font-size: 18px;
+                font-family: "Afacad Flux", serif;
+            }
+        }
+    }
+
+    .closeIcon {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 30px;
+        color: white;
+        cursor: pointer;
+        z-index: 6;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .header {
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .first {
+                display: none;
+            }
+
+            .second {
+                display: none;
+            }
+
+            .bars {
+                display: block;
+                cursor: pointer;
+                font-size: 30px;
+                color: white;
+            }
+        }
+    }
+}
