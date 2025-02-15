@@ -1,4 +1,4 @@
-.standartcontainer{
+.container{
     width: 100%;
     height: auto;
     background-color: #333;
@@ -9,6 +9,7 @@
     align-items: center;
 
     h1{
+        padding-top: 20px;
         color:goldenrod;
     }
     .imgBox{
@@ -52,21 +53,21 @@
 
 
 @media screen and (max-width:1286px) {
-    .standartcontainer{
+    .container{
         .imgBox{
             grid-template-columns: repeat(3,1fr);
         }
     }
 }
 @media screen and (max-width:964px) {
-    .standartcontainer{
+    .container{
         .imgBox{
             grid-template-columns: repeat(2,1fr);
         }
     }
 }
 @media screen and (max-width:650px) {
-    .standartcontainer{
+    .container{
         h1{
             font-size: 20px;
         }
@@ -80,7 +81,7 @@
     }
 }
 @media screen and (max-width:540px) {
-    .standartcontainer{
+    .container{
         .imgBox{
             grid-template-columns: repeat(2,1fr);
             gap: 10px;
@@ -99,7 +100,7 @@
     }
 }
 @media screen and (max-width:438px) {
-    .standartcontainer{
+    .container{
         .imgBox{
             
             grid-template-columns: repeat(2,1fr);

@@ -10,7 +10,7 @@ export const postKingRoomsThunk = createAsyncThunk("api/poststandartkingimg", as
     return response.data
 })
 export const deleteKingRoomsThunk = createAsyncThunk("api/deletestandartkingimg", async(id) => {
-    const response = await axios.get(`http://localhost:8800/standartKingimg/${id}`)
+    const response = await axios.delete(`http://localhost:8800/standartKingimg/${id}`)
     return id
 })
 

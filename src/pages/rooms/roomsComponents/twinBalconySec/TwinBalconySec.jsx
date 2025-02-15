@@ -1,28 +1,27 @@
 import React, { useEffect } from 'react'
-import styles from './StandartKing.module.scss'
+import styles from './TwinBalconySec.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
-import { getKingRoomsThunk } from '../../../../redux/redurces/standartKingSLice'
+import { getSTKBalconyThunk } from '../../../../redux/redurces/stKBalconySlice'
+import { getTwinBalconyThunk } from '../../../../redux/redurces/twinBalcony'
 import { useNavigate } from 'react-router-dom'
 
-const StandartKing = () => {
-
-   const dispatch = useDispatch()
+const TwinBalconySec = () => {
+    const dispatch = useDispatch()
 
    useEffect(() => {
-    dispatch(getKingRoomsThunk())
+    dispatch(getTwinBalconyThunk())
    }, [])
 
-   const standartKings = useSelector((state) => state.standartKings.standartKings) || []
+   const twinbalcony = useSelector((state) => state.twinbalcony.twinbalcony) || []
 
    const navigation = useNavigate()
    const goReservation = () => {
      navigation('/reservation')
    }
-
   return (
-    <div className={styles.standartcontainer}>
-        <h1>STANDARD KING</h1>
-        {standartKings && standartKings.map(item => {
+    <div className={styles.container}>
+         <h1>STANDAR TWIN BALCONY</h1>
+        {twinbalcony && twinbalcony.map(item => {
             return <div className={styles.imgBox}>
                 <img  src={item.firstPhoto} alt="" />
                 <img  src={item.secondPhoto} alt="" />
@@ -37,4 +36,4 @@ const StandartKing = () => {
   )
 }
 
-export default StandartKing
+export default TwinBalconySec 
