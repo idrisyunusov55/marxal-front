@@ -11,6 +11,7 @@ import  mediumvillaSlice  from "./redurces/mediumVilla";
 import  bigvillaSlice  from "./redurces/bigVillaSlice";
 import  ambassadorSlice  from "./redurces/ambassadorSlice";
 import  royalSlice  from "./redurces/royalSlice";
+import  roomCardSlice  from "./redurces/roomCards";
 
 export const store = configureStore({
     reducer:{
@@ -25,7 +26,8 @@ export const store = configureStore({
         mediumvilla:mediumvillaSlice,
         bigvilla:bigvillaSlice,
         ambassador:ambassadorSlice,
-        royal:royalSlice
+        royal:royalSlice,
+        room:roomCardSlice
     }
 })
 

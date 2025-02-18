@@ -1,0 +1,34 @@
+.container{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #603813;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #b29f94, #603813);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #b29f94, #603813); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    gap: 30px;
+
+
+
+    h1{
+        font-size: 50px;
+        color: white;
+    }
+
+    
+}
+.goback{
+        width: 120px;
+        height: 40px;
+        background-color: #b29f94;
+        color: white;
+        border: none;
+
+        &:hover{
+            background-color: transparent;
+            border: 1px solid white;
+            transition: 0.5s;
+        }
+    }
