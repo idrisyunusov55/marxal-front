@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Header.module.scss';
 import { FaBarsStaggered } from 'react-icons/fa6';
-import { FaTimes } from 'react-icons/fa'; // X işarəsini əlavə etmək üçün
+import { FaTimes } from 'react-icons/fa';   
 import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
@@ -22,6 +22,9 @@ const Header = () => {
 
   const goHome = () => {
     navigation('/')
+  }
+  const goOdenis = () => {
+    navigation('/odenis')
   }
 
   return (
@@ -46,7 +49,7 @@ const Header = () => {
               <li><a href="">Sağlamlıq və Spa</a></li>
               <li><a href="">Tədbirlər</a></li>
               <li><a href="">Tur və Nəqliyyat</a></li>
-              <li><a href="">Media</a></li>
+              <li><a onClick={goOdenis} href="">Ödəniş</a></li>
             </ul>
           </nav>
         </div>
@@ -63,7 +66,7 @@ const Header = () => {
             <li><a href="">Sağlamlıq və Spa</a></li>
             <li><a href="">Tədbirlər</a></li>
             <li><a href="">Tur və Nəqliyyat</a></li>
-            <li><a href="">Media</a></li>
+            <li><a href="">Ödəniş</a></li>
           </ul>
         </div>
       )}

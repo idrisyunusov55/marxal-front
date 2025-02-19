@@ -5,9 +5,10 @@ import { motion } from "framer-motion";
 import styles from "./RoomCardsSec.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { getRoomCardsThunk } from "../../../redux/redurces/roomCards";
-import Layout from "../../../components/layout/Layout";
 import Header from "../../../components/header/Header";
 import Footer from "../../../components/footer/Footer";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const MAX_GUESTS = 11;
 const MAX_ROOMS = 2;
@@ -16,9 +17,13 @@ const RoomCardsSec = () => {
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
   const [rooms, setRooms] = useState([{ id: 1, adults: 2, children: 0 }]);
+  const [totalPrice, setTotalPrice] = useState({});
+  const [filteredRooms, setFilteredRooms] = useState([]);
 
   const getTotalGuests = () =>
     rooms.reduce((sum, room) => sum + room.adults + room.children, 0);
+  console.log(getTotalGuests);
+  
 
   const handleGuestChange = (roomId, type, value) => {
     setRooms((prevRooms) =>
@@ -29,7 +34,7 @@ const RoomCardsSec = () => {
               [type]: Math.max(
                 type === "adults" ? 1 : 0,
                 Math.min(room[type] + value, MAX_GUESTS - getTotalGuests())
-              )
+              ),
             }
           : room
       )
@@ -48,13 +53,53 @@ const RoomCardsSec = () => {
     }
   };
 
+  const calculateTotalPrice = () => {
+    if (startDate && endDate) {
+      const diffDays = Math.ceil(
+        Math.abs(endDate - startDate) / (1000 * 60 * 60 * 24)
+      );
+      const newPrices = {};
+  
+      filteredRooms.forEach((room) => {
+        let totalGuestsInAllRooms = getTotalGuests();
+        if (room.maxPeople >= totalGuestsInAllRooms) {
+          newPrices[room._id] = diffDays * room.price;
+        }
+      });
+  
+      setTotalPrice(newPrices);
+      console.log(newPrices);
+      
+    } else {
+      setTotalPrice({});
+    }
+  };
+
+  useEffect(() => {
+    calculateTotalPrice();
+  }, [startDate, endDate, filteredRooms]);
+
+  const handleReservation = (roomId) => {
+    if (!startDate || !endDate) {
+      alert("Zəhmət olmasa tarix aralığı seçin.");
+      return;
+    }
+    alert(`Rezervasiya uğurla tamamlandı! Ümumi qiymət: ${totalPrice[roomId] || 0} AZN`);
+  };
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getRoomCardsThunk());
   }, [dispatch]);
 
-  const room = useSelector((state) => state.room.room) || [];
+  const allRooms = useSelector((state) => state.room.room) || [];
+
+  useEffect(() => {
+    const totalGuests = getTotalGuests();
+    const filtered = allRooms.filter((room) => room.maxPeople >= totalGuests);
+    setFilteredRooms(filtered);
+  }, [rooms, allRooms]);
 
   return (
     <>
@@ -75,7 +120,7 @@ const RoomCardsSec = () => {
           <div className={styles.roomsContainer}>
             {rooms.map((room) => (
               <motion.div
-                key={room.id}
+                key={room._id}
                 className={styles.roomCard}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -98,35 +143,30 @@ const RoomCardsSec = () => {
                   </div>
                 </div>
                 {rooms.length > 1 && (
-                  <button className={styles.removeButton} onClick={() => removeRoom(room.id)}>
+                  <button className={styles.removeButton} onClick={() => removeRoom(room._id)}>
                     Sil
                   </button>
                 )}
               </motion.div>
             ))}
-            {rooms.length < MAX_ROOMS && (
-              <motion.button
-                className={styles.addRoomButton}
-                onClick={addRoom}
-                whileHover={{ scale: 1.05 }}
-              >
-                + Nömrə əlavə et
-              </motion.button>
-            )}
           </div>
         </div>
         <div className={styles.cards}>
-          {room.map((item, index) => (
-            <div key={index} className={styles.card}>
-              <img src={item.firstPhoto} alt={item.name} />
+          {filteredRooms.map((item) => (
+            <div key={item.id} className={styles.card}>
+              <Carousel showThumbs={false} dynamicHeight={true}>
+                <div><img src={item.firstPhoto} alt={item.name} /></div>
+                <div><img src={item.secondPhoto} alt={item.name} /></div>
+                <div><img src={item.thirdPhoto} alt={item.name} /></div>
+              </Carousel>
               <div className={styles.info}>
                 <h5>{item.name}</h5>
                 <p>{item.maxPeople} qonaq</p>
-                <p>{item.sahe}</p>
-                <p>{item.otaqSayi} otaq</p>
-                <p>{item.totalroom} nömrə qalıb</p>
-                <p>{item.price} AZN </p>
-                <button className={styles.addReservation}>Rezerv Et</button>
+                <p>{item.price} AZN / gecə</p>
+                <p>Ümumi qiymət: {totalPrice[item._id] || 0} AZN</p>
+                <button className={styles.addReservation} onClick={() => handleReservation(item.id)}>
+                  Rezerv Et
+                </button>
               </div>
             </div>
           ))}
