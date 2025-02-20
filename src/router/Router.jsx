@@ -8,6 +8,7 @@ import AdminPanel from '../pages/adminPanel/AdminPanel'
 import Odenis from '../pages/odenis/Odenis'
 import Qediyyat from '../pages/qediyyat/Qediyyat'
 import Login from '../pages/qediyyat/login/Login'
+import Register from '../pages/qediyyat/register/Register'
 
 const Router = () => {
   return (
@@ -21,6 +22,7 @@ const Router = () => {
     <Route path='/odenis' element={<Odenis/>}/>
     <Route path='/qediyyat' element={<Qediyyat/>}/>
     <Route path='/login' element={<Login/>}/>
+    <Route path='/register' element={<Register/>}/>
    </Routes>
     </BrowserRouter>
   )

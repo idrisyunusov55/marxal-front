@@ -55,6 +55,22 @@
             }
         }
     }
+
+    .links{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 1rem;
+        .txt{
+            color: #FFD700;
+            font-size: 0.9rem;
+            cursor: pointer;
+
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+    }
 }
 
 

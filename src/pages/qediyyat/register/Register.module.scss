@@ -1,0 +1,142 @@
+.registerContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #000; // Qara fon
+    color: #ffd700; // Qızılı rəng
+    font-family: Arial, sans-serif;
+    padding: 1rem; // Kiçik ekranlarda boşluq
+  
+    @media (max-width: 768px) {
+      padding: 0.5rem;
+    }
+  }
+  
+  .registerForm {
+    background-color: #1a1a1a; // Tünd qara fon
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.5); // Qızılı kölgə
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+  
+    @media (max-width: 768px) {
+      padding: 1.5rem;
+    }
+  
+    @media (max-width: 480px) {
+      padding: 1rem;
+    }
+  
+    h2 {
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      color: #ffd700; // Qızılı rəng
+  
+      @media (max-width: 768px) {
+        font-size: 1.75rem;
+      }
+  
+      @media (max-width: 480px) {
+        font-size: 1.5rem;
+      }
+    }
+  
+    .nameFields {
+      display: flex;
+      gap: 1rem; // Ad və soyad arasında boşluq
+  
+      @media (max-width: 480px) {
+        flex-direction: column; // Kiçik ekranlarda alt-alta düz
+        gap: 0;
+      }
+    }
+  
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+      color: #ffd700; // Qızılı rəng
+  
+      @media (max-width: 480px) {
+        font-size: 0.9rem;
+      }
+    }
+  
+    input {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ffd700; // Qızılı çərçivə
+      border-radius: 5px;
+      background-color: #333; // Tünd boz fon
+      color: #fff; // Ağ rəng
+      font-size: 1rem;
+  
+      @media (max-width: 480px) {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+      }
+  
+      &::placeholder {
+        color: #aaa; // Placeholder rəngi
+      }
+  
+      &:focus {
+        outline: none;
+        border-color: #ffd700; // Qızılı çərçivə
+        box-shadow: 0 0 5px rgba(255, 215, 0, 0.5); // Qızılı kölgə
+      }
+    }
+  
+    button {
+      width: 100%;
+      padding: 0.75rem;
+      background-color: #ffd700; // Qızılı rəng
+      color: #000; // Qara mətn
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+  
+      @media (max-width: 480px) {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+      }
+  
+      &:hover {
+        background-color: #e6b800; // Tünd qızılı rəng
+      }
+  
+      &:disabled {
+        background-color: #666; // Boz rəng
+        cursor: not-allowed;
+      }
+    }
+  
+    .links {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap; // Kiçik ekranlarda linkləri alt-alta düz
+  
+      a {
+        color: #ffd700; // Qızılı rəng
+        text-decoration: none;
+        font-size: 0.9rem;
+        margin: 0.25rem 0; // Kiçik ekranlarda boşluq
+  
+        @media (max-width: 480px) {
+          font-size: 0.8rem;
+        }
+  
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }

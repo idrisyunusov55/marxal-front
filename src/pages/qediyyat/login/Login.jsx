@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import styles from "./Login.module.scss";
 import { loginThunk } from "../../../redux/redurces/authSlice";
 
@@ -40,6 +40,11 @@ const Login = () => {
         },
     });
 
+    const navigation = useNavigate();
+    const goRegister = () => {
+        navigation('/register')
+    }
+
     return (
         <div className={styles.loginContainer}>
             <form className={styles.loginForm} onSubmit={formik.handleSubmit}>
@@ -66,6 +71,11 @@ const Login = () => {
                 <button type="submit" disabled={isFetching}>
                     {isFetching ? "Giriş edilir..." : "Daxil ol"}
                 </button>
+
+                <div className={styles.links}>
+                  <p onClick={goRegister} className={styles.txt}>Hesab Yarat</p>
+                  <p className={styles.txt}>Şifrə Unutmusuz?</p>
+                </div>
             </form>
         </div>
     );
