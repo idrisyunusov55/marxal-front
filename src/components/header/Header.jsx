@@ -27,6 +27,10 @@ const Header = () => {
     navigation('/odenis')
   }
 
+  const goQediyyat = () => {
+    navigation('/qediyyat')
+  }
+
   return (
     <header className={styles.header}>
       <div className={styles.container}>
@@ -48,7 +52,7 @@ const Header = () => {
             <ul>
               <li><a href="">Sağlamlıq və Spa</a></li>
               <li><a href="">Tədbirlər</a></li>
-              <li><a href="">Tur və Nəqliyyat</a></li>
+              <li><a onClick={goQediyyat} href="">Qediyyat</a></li>
               <li><a onClick={goOdenis} href="">Ödəniş</a></li>
             </ul>
           </nav>

@@ -6,6 +6,8 @@ import RoomCardsSec from '../pages/rooms/roomCards/RoomCardsSec'
 import NotFaund from '../pages/notFaund/NotFaund'
 import AdminPanel from '../pages/adminPanel/AdminPanel'
 import Odenis from '../pages/odenis/Odenis'
+import Qediyyat from '../pages/qediyyat/Qediyyat'
+import Login from '../pages/qediyyat/login/Login'
 
 const Router = () => {
   return (
@@ -17,6 +19,8 @@ const Router = () => {
     <Route path='*' element={<NotFaund/>}/>
     <Route path='/adminpanel' element={<AdminPanel/>}/>
     <Route path='/odenis' element={<Odenis/>}/>
+    <Route path='/qediyyat' element={<Qediyyat/>}/>
+    <Route path='/login' element={<Login/>}/>
    </Routes>
     </BrowserRouter>
   )
