@@ -126,7 +126,6 @@ const Register = () => {
 
         <div className={styles.links}>
           <Link to="/login">Hesabınız var? Daxil olun</Link>
-          <Link to="/forgot-password">Şifrəmi unutdum</Link>
         </div>
       </form>
     </div>

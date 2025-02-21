@@ -10,6 +10,7 @@ import Qediyyat from '../pages/qediyyat/Qediyyat'
 import Login from '../pages/qediyyat/login/Login'
 import Register from '../pages/qediyyat/register/Register'
 
+
 const Router = () => {
   return (
     <BrowserRouter>
@@ -23,6 +24,7 @@ const Router = () => {
     <Route path='/qediyyat' element={<Qediyyat/>}/>
     <Route path='/login' element={<Login/>}/>
     <Route path='/register' element={<Register/>}/>
+   
    </Routes>
     </BrowserRouter>
   )

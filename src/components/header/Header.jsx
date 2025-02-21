@@ -3,9 +3,15 @@ import styles from './Header.module.scss';
 import { FaBarsStaggered } from 'react-icons/fa6';
 import { FaTimes } from 'react-icons/fa';   
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from '../../redux/redurces/authSlice';
+
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.auth.user); // Redux-dan istifadəçi məlumatını götürürük
 
   const toggleMenu = () => {
     setIsMenuOpen(prev => !prev);
@@ -15,21 +21,27 @@ const Header = () => {
     setIsMenuOpen(false);
   };
 
-  const navigation = useNavigate()
   const goRooms = () => {
-    navigation('/rooms')
-  }
+    navigate('/rooms');
+  };
 
   const goHome = () => {
-    navigation('/')
-  }
+    navigate('/');
+  };
+
   const goOdenis = () => {
-    navigation('/odenis')
-  }
+    navigate('/odenis');
+  };
 
   const goQediyyat = () => {
-    navigation('/qediyyat')
-  }
+    navigate('/qediyyat');
+  };
+
+  // Logout funksiyası
+  const handleLogout = () => {
+    dispatch(logout()); 
+    navigate("/"); 
+  };
 
   return (
     <header className={styles.header}>
@@ -45,15 +57,19 @@ const Header = () => {
           </nav>
         </div>
         <div className={styles.logo}>
-          <img onClick={goHome} src="https://www.marxalresort.az/assets/images/3-2868x2153.png" alt="" />
+          <img onClick={goHome} src="https://www.marxalresort.az/assets/images/3-2868x2153.png" alt="Logo" />
         </div>
         <div className={styles.second}>
           <nav>
             <ul>
               <li><a href="">Sağlamlıq və Spa</a></li>
               <li><a href="">Tədbirlər</a></li>
-              <li><a onClick={goQediyyat} href="">Qediyyat</a></li>
-              <li><a onClick={goOdenis} href="">Ödəniş</a></li>
+              {user ? ( 
+                <li><a onClick={handleLogout}>Çıxış</a></li>
+              ) : (
+                <li><a onClick={goQediyyat}>Qeydiyyat</a></li>
+              )}
+              <li><a onClick={goOdenis}>Ödəniş</a></li>
             </ul>
           </nav>
         </div>
