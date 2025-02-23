@@ -9,6 +9,7 @@ import Odenis from '../pages/odenis/Odenis'
 import Qediyyat from '../pages/qediyyat/Qediyyat'
 import Login from '../pages/qediyyat/login/Login'
 import Register from '../pages/qediyyat/register/Register'
+import DetailPage from '../pages/detailPage/DetailPage'
 
 
 const Router = () => {
@@ -24,7 +25,7 @@ const Router = () => {
     <Route path='/qediyyat' element={<Qediyyat/>}/>
     <Route path='/login' element={<Login/>}/>
     <Route path='/register' element={<Register/>}/>
-   
+   <Route path='/detail' element={<DetailPage/>}/>
    </Routes>
     </BrowserRouter>
   )

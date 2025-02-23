@@ -34,10 +34,10 @@ const Register = () => {
         const response = await dispatch(registerThunk(values)).unwrap();
         if (response._id) {
           alert("Qeydiyyat uğurla tamamlandı!");
-          navigate("/login"); // Login səhifəsinə yönləndir
+          navigate("/login");
         }
       } catch (error) {
-        console.error("Qeydiyyat xətası:", error); // Xəta mesajını konsola yaz
+        console.error("Qeydiyyat xətası:", error); 
       }
     },
   });

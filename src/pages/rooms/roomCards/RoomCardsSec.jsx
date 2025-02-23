@@ -1,29 +1,38 @@
+// src/pages/RoomCardsSec/RoomCardsSec.js
 import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { motion } from "framer-motion";
 import styles from "./RoomCardsSec.module.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { getRoomCardsThunk } from "../../../redux/redurces/roomCards";
+import { getRoomCardsThunk, reserveRoomThunk } from "../../../redux/redurces/roomCards";
 import Header from "../../../components/header/Header";
 import Footer from "../../../components/footer/Footer";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { useNavigate } from "react-router-dom";
 
 const MAX_GUESTS = 11;
 const MAX_ROOMS = 2;
 
 const RoomCardsSec = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
   const [rooms, setRooms] = useState([{ id: 1, adults: 2, children: 0 }]);
   const [totalPrice, setTotalPrice] = useState({});
   const [filteredRooms, setFilteredRooms] = useState([]);
 
+  useEffect(() => {
+    dispatch(getRoomCardsThunk());
+  }, [dispatch]);
+
+  const allRooms = useSelector((state) => state.room.room) || [];
+  const userId = useSelector((state) => state.auth.user?._id);
+
   const getTotalGuests = () =>
     rooms.reduce((sum, room) => sum + room.adults + room.children, 0);
-  console.log(getTotalGuests);
-  
 
   const handleGuestChange = (roomId, type, value) => {
     setRooms((prevRooms) =>
@@ -68,8 +77,6 @@ const RoomCardsSec = () => {
       });
   
       setTotalPrice(newPrices);
-      console.log(newPrices);
-      
     } else {
       setTotalPrice({});
     }
@@ -79,27 +86,42 @@ const RoomCardsSec = () => {
     calculateTotalPrice();
   }, [startDate, endDate, filteredRooms]);
 
-  const handleReservation = (roomId) => {
-    if (!startDate || !endDate) {
-      alert("Zəhmət olmasa tarix aralığı seçin.");
-      return;
-    }
-    alert(`Rezervasiya uğurla tamamlandı! Ümumi qiymət: ${totalPrice[roomId] || 0} AZN`);
-  };
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getRoomCardsThunk());
-  }, [dispatch]);
-
-  const allRooms = useSelector((state) => state.room.room) || [];
-
   useEffect(() => {
     const totalGuests = getTotalGuests();
     const filtered = allRooms.filter((room) => room.maxPeople >= totalGuests);
     setFilteredRooms(filtered);
   }, [rooms, allRooms]);
+
+  const handleReservation = (roomId) => {
+    if (!startDate || !endDate) {
+      alert("Zəhmət olmasa tarix aralığı seçin.");
+      return;
+    }
+  
+    const reservationData = {
+      userId,
+      roomId,
+      checkIn: startDate.toISOString().split("T")[0],  
+      checkOut: endDate.toISOString().split("T")[0],  
+      totalGuests: getTotalGuests(),
+      totalPrice: totalPrice[roomId] || 0,
+    };
+  
+    dispatch(reserveRoomThunk({ roomId, reservationData }))
+      .then((res) => {
+        if (res.meta.requestStatus === "fulfilled") {
+          navigate("/odenis", { state: reservationData });
+        }
+      })
+      .catch((error) => {
+        console.error("Rezervasiya uğursuz oldu:", error.response?.data || error.message);
+        alert("Rezervasiya zamanı xəta baş verdi. Zəhmət olmasa yenidən cəhd edin.");
+      });
+  };
+
+  const handleDetailClick = (room) => {
+    navigate("/detail", { state: { room } });
+  };
 
   return (
     <>
@@ -120,7 +142,7 @@ const RoomCardsSec = () => {
           <div className={styles.roomsContainer}>
             {rooms.map((room) => (
               <motion.div
-                key={room._id}
+                key={room.id}
                 className={styles.roomCard}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -143,7 +165,7 @@ const RoomCardsSec = () => {
                   </div>
                 </div>
                 {rooms.length > 1 && (
-                  <button className={styles.removeButton} onClick={() => removeRoom(room._id)}>
+                  <button className={styles.removeButton} onClick={() => removeRoom(room.id)}>
                     Sil
                   </button>
                 )}
@@ -153,7 +175,7 @@ const RoomCardsSec = () => {
         </div>
         <div className={styles.cards}>
           {filteredRooms.map((item) => (
-            <div key={item.id} className={styles.card}>
+            <div key={item._id} className={styles.card}>
               <Carousel showThumbs={false} dynamicHeight={true}>
                 <div><img src={item.firstPhoto} alt={item.name} /></div>
                 <div><img src={item.secondPhoto} alt={item.name} /></div>
@@ -164,8 +186,11 @@ const RoomCardsSec = () => {
                 <p>{item.maxPeople} qonaq</p>
                 <p>{item.price} AZN / gecə</p>
                 <p>Ümumi qiymət: {totalPrice[item._id] || 0} AZN</p>
-                <button className={styles.addReservation} onClick={() => handleReservation(item.id)}>
+                <button className={styles.addReservation} onClick={() => handleReservation(item._id)}>
                   Rezerv Et
+                </button>
+                <button className={styles.detailButton} onClick={() => handleDetailClick(item)}>
+                  Ətraflı məlumat
                 </button>
               </div>
             </div>

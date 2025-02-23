@@ -30,7 +30,7 @@ const Login = () => {
                 console.log("Login cavabı:", response.payload);
 
                 if (response.payload?._id) {
-                    navigate("/");
+                    navigate(-1);
                 } else {
                     setPasswordError(response.payload?.message || "Şifrə səhvdir");
                 }

@@ -1,7 +1,8 @@
 .main {
   padding-top: 200px;
-  background-color: #333;
+  background-color: #000; /* Qara fon */
   padding: 0 20px;
+  color: #ffd700; /* Qızılı rəng */
 }
 
 .container {
@@ -20,10 +21,12 @@
 
 .datePicker {
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #ffd700; /* Qızılı çərçivə */
   border-radius: 4px;
   width: 100%;
   max-width: 300px;
+  background-color: #000; /* Qara fon */
+  color: #ffd700; /* Qızılı rəng */
 }
 
 .roomsContainer {
@@ -33,10 +36,11 @@
 }
 
 .roomCard {
-  border: 1px solid #ccc;
+  border: 1px solid #ffd700; /* Qızılı çərçivə */
   border-radius: 8px;
   padding: 15px;
-  background-color: #f9f9f9;
+  background-color: #1a1a1a; /* Tünd qara fon */
+  color: #ffd700; /* Qızılı rəng */
 }
 
 .roomTitle {
@@ -58,41 +62,65 @@
 
   button {
     padding: 5px 10px;
-    background-color: #007bff;
-    color: white;
+    background-color: #ffd700; /* Qızılı rəng */
+    color: #000; /* Qara rəng */
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: all 0.3s ease;
 
     &:hover {
-      background-color: #0056b3;
+      background-color: #ccac00; /* Tünd qızılı rəng */
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(255, 215, 0, 0.3);
+    }
+
+    &:active {
+      transform: translateY(0);
+      box-shadow: none;
     }
   }
 }
 
 .removeButton {
   padding: 8px 12px;
-  background-color: #dc3545;
+  background-color: #dc3545; /* Qırmızı rəng */
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  transition: all 0.3s ease;
 
   &:hover {
-    background-color: #c82333;
+    background-color: #c82333; /* Tünd qırmızı rəng */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: none;
   }
 }
 
 .addRoomButton {
   padding: 10px;
-  background-color: #28a745;
+  background-color: #28a745; /* Yaşıl rəng */
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  transition: all 0.3s ease;
 
   &:hover {
-    background-color: #218838;
+    background-color: #218838; /* Tünd yaşıl rəng */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: none;
   }
 }
 
@@ -103,11 +131,12 @@
 }
 
 .card {
-  border: 1px solid #ccc;
+  border: 1px solid #ffd700; /* Qızılı çərçivə */
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  background-color: white;
+  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3); /* Qızılı kölgə */
+  background-color: #1a1a1a; /* Tünd qara fon */
+  color: #ffd700; /* Qızılı rəng */
 
   .carousel {
     .slide img {
@@ -130,15 +159,58 @@
     }
 
     .addReservation {
-      padding: 8px 12px;
-      background-color: #007bff;
-      color: white;
+      padding: 10px 20px;
+      background-color: #ffd700; /* Qızılı rəng */
+      color: #000; /* Qara rəng */
       border: none;
-      border-radius: 4px;
+      border-radius: 5px;
       cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
 
       &:hover {
-        background-color: #0056b3;
+        background-color: #e6b800; /* Tünd qızılı rəng */
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(255, 215, 0, 0.3);
+      }
+
+      &:active {
+        transform: translateY(0);
+        box-shadow: none;
+      }
+    }
+
+    .detailButton {
+      padding: 10px 20px;
+      background-color: #007bff; /* Mavi rəng */
+      color: #fff; /* Ağ rəng */
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+
+      &:hover {
+        background-color: #0056b3; /* Tünd mavi rəng */
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+      }
+
+      &:active {
+        transform: translateY(0);
+        box-shadow: none;
       }
     }
   }
@@ -197,18 +269,27 @@
         font-size: 14px;
       }
 
-      .addReservation {
-        padding: 6px 10px;
-        font-size: 14px;
+      .addReservation,
+      .detailButton {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+        gap: 6px;
       }
     }
   }
 }
 
 @media (max-width: 480px) {
+  .main{
+    height: 400vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
   .cards {
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 10px;
+    gap: 20px;
   }
 
   .card {
@@ -227,9 +308,11 @@
         font-size: 12px;
       }
 
-      .addReservation {
-        padding: 5px 8px;
-        font-size: 12px;
+      .addReservation,
+      .detailButton {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+        gap: 4px;
       }
     }
   }
@@ -259,9 +342,11 @@
         font-size: 10px;
       }
 
-      .addReservation {
+      .addReservation,
+      .detailButton {
         padding: 4px 6px;
-        font-size: 10px;
+        font-size: 0.7rem;
+        gap: 2px;
       }
     }
   }

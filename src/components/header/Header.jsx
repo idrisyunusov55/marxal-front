@@ -5,6 +5,7 @@ import { FaTimes } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from '../../redux/redurces/authSlice';
+import { getUserReservationsThunk } from '../../redux/redurces/roomCards';
 
 
 const Header = () => {
@@ -29,9 +30,15 @@ const Header = () => {
     navigate('/');
   };
 
-  const goOdenis = () => {
-    navigate('/odenis');
+  const goOdenis = async () => {
+    try {
+      const response = await dispatch(getUserReservationsThunk(user._id)).unwrap();
+      navigate('/odenis', { state: { reservations: response } });
+    } catch (error) {
+      console.error("❌ Rezervasiya məlumatları alınarkən xəta:", error);
+    }
   };
+  
 
   const goQediyyat = () => {
     navigate('/qediyyat');
