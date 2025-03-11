@@ -188,8 +188,8 @@
 
     .detailButton {
       padding: 10px 20px;
-      background-color: #007bff; /* Mavi rəng */
-      color: #fff; /* Ağ rəng */
+      background-color: #007bff; 
+      color: #fff; 
       border: none;
       border-radius: 5px;
       cursor: pointer;
@@ -216,13 +216,19 @@
   }
 }
 
-/* Responsive Design */
+
 @media (max-width: 768px) {
+
+  .main{
+    height: 700vh;
+  }
   .container {
+    
     padding: 10px;
   }
 
   .datePicker {
+    margin-top: 100px;
     max-width: 100%;
   }
 
@@ -281,7 +287,7 @@
 
 @media (max-width: 480px) {
   .main{
-    height: 400vh;
+    height: 600vh;
     display: flex;
     justify-content: center;
     align-items: center;

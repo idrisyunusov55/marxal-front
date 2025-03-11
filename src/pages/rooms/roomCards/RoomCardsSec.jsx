@@ -175,23 +175,21 @@ const RoomCardsSec = () => {
         </div>
         <div className={styles.cards}>
           {filteredRooms.map((item) => (
-            <div key={item._id} className={styles.card}>
-              <Carousel showThumbs={false} dynamicHeight={true}>
-                <div><img src={item.firstPhoto} alt={item.name} /></div>
+            <div key={item._id} className={styles.card } >
+              <Carousel showThumbs={false} dynamicHeight={true} >
+                <div><img src={item.firstPhoto} alt={item.name}  /></div>
                 <div><img src={item.secondPhoto} alt={item.name} /></div>
                 <div><img src={item.thirdPhoto} alt={item.name} /></div>
               </Carousel>
               <div className={styles.info}>
-                <h5>{item.name}</h5>
+                <h5 onClick={() => handleDetailClick(item)} style={{cursor:"pointer"}}>{item.name}</h5>
                 <p>{item.maxPeople} qonaq</p>
                 <p>{item.price} AZN / gecə</p>
                 <p>Ümumi qiymət: {totalPrice[item._id] || 0} AZN</p>
                 <button className={styles.addReservation} onClick={() => handleReservation(item._id)}>
                   Rezerv Et
                 </button>
-                <button className={styles.detailButton} onClick={() => handleDetailClick(item)}>
-                  Ətraflı məlumat
-                </button>
+               
               </div>
             </div>
           ))}

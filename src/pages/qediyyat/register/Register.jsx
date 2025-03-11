@@ -6,7 +6,6 @@ import styles from "./Register.module.scss";
 import { registerThunk } from "../../../redux/redurces/authSlice";
 import * as Yup from "yup";
 
-// Form validasiya sxemi
 const validationSchema = Yup.object({
   name: Yup.string().required("Ad tələb olunur"),
   surname: Yup.string().required("Soyad tələb olunur"),
@@ -34,10 +33,10 @@ const Register = () => {
         const response = await dispatch(registerThunk(values)).unwrap();
         if (response._id) {
           alert("Qeydiyyat uğurla tamamlandı!");
-          navigate("/login");
+          navigate("/login"); // Qeydiyyatdan sonra login səhifəsinə yönləndir
         }
       } catch (error) {
-        console.error("Qeydiyyat xətası:", error); 
+        console.error("Qeydiyyat xətası:", error);
       }
     },
   });

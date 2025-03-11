@@ -12,6 +12,7 @@ const Detail = () => {
   if (!room) {
     return <div>Otaq məlumatı tapılmadı.</div>;
   }
+  
 
   return (
     <>
@@ -26,7 +27,7 @@ const Detail = () => {
           <div className={styles.detailInfo}>
             <p><strong>Qonaq Sayı:</strong> {room.maxPeople}</p>
             <p><strong>Qiymət:</strong> {room.price} AZN / gecə</p>
-            <p><strong>Təsvir:</strong> {room.description}</p>
+            <p><strong>Melumat:</strong>{room.roominformation}</p>
           </div>
         </div>
         <button className={styles.backButton} onClick={() => navigate(-1)}>

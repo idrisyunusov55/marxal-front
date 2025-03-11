@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getUserReservationsThunk, cancelReservationThunk } from "../../redux/redurces/roomCards"; 
-import Layout from "../../components/layout/Layout";
+import { getUserReservationsThunk, deleteReservationThunk } from "../../redux/redurces/roomCards"; 
 import styles from './Odenis.module.scss' 
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
@@ -17,16 +16,19 @@ const Odenis = () => {
 
   const reservations = location.state?.reservations || reduxReservations;
 
+  const goHome = () => {
+    navigate('/')
+  }
+
   useEffect(() => {
     if (!location.state?.reservations && user?._id) {
       dispatch(getUserReservationsThunk(user._id));
     }
   }, [dispatch, user, location.state]);
 
-
   const handleCancelReservation = (reservationId) => {
     if (window.confirm("Rezervasiyanı ləğv etmək istədiyinizə əminsinizmi?")) {
-      dispatch(cancelReservationThunk(reservationId))
+      dispatch(deleteReservationThunk(reservationId))
         .then(() => {
           alert("Rezervasiya uğurla ləğv edildi.");
           dispatch(getUserReservationsThunk(user._id)); 
@@ -38,16 +40,14 @@ const Odenis = () => {
     }
   };
 
-
   const handleConfirmReservation = (reservationId) => {
     alert(`Rezervasiya ${reservationId} uğurla təsdiqləndi.`);
- 
   };
 
   return (
     <>
-    <Header/>
-    <div className={styles.odenisContainer}>
+      <Header/>
+      <div className={styles.odenisContainer}>
         <h1 className={styles.odenisTitle}>Ödəniş Səhifəsi</h1>
         {reservations.length > 0 ? (
           <ul className={styles.reservationsList}>
@@ -66,7 +66,7 @@ const Odenis = () => {
                   </button>
                   <button
                     className={styles.confirmButton}
-                    onClick={() => handleConfirmReservation(room._id)}
+                    onClick={goHome}
                   >
                     Təsdiq et
                   </button>
@@ -78,9 +78,8 @@ const Odenis = () => {
           <p className={styles.noReservations}>Hazırda rezerv etdiyiniz otaq yoxdur.</p>
         )}
       </div>
-    <Footer/>
+      <Footer/>
     </>
-
   );
 };
 

@@ -12,7 +12,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector((state) => state.auth.user); // Redux-dan istifadəçi məlumatını götürürük
+  const user = useSelector((state) => state.auth.user); 
 
   const toggleMenu = () => {
     setIsMenuOpen(prev => !prev);
@@ -44,7 +44,7 @@ const Header = () => {
     navigate('/qediyyat');
   };
 
-  // Logout funksiyası
+
   const handleLogout = () => {
     dispatch(logout()); 
     navigate("/"); 
@@ -86,14 +86,15 @@ const Header = () => {
         <div className={styles.mobileMenu}>
           <FaTimes className={styles.closeIcon} onClick={closeMenu} /> 
           <ul>
+            <li><a onClick={goHome} href="">Ana Səhifə</a></li>
             <li><a href="">Haqqımızda</a></li>
-            <li><a href="">Otaqlar</a></li>
+            <li><a onClick={goRooms} href="">Otaqlar</a></li>
             <li><a href="">Restoranlar</a></li>
             <li><a href="">Əyləncə</a></li>
             <li><a href="">Sağlamlıq və Spa</a></li>
             <li><a href="">Tədbirlər</a></li>
             <li><a href="">Tur və Nəqliyyat</a></li>
-            <li><a href="">Ödəniş</a></li>
+            <li><a onClick={goOdenis} href="">Ödəniş</a></li>
           </ul>
         </div>
       )}

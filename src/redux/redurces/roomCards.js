@@ -13,7 +13,6 @@ export const postRoomCardsThunk = createAsyncThunk("postroom", async (data) => {
   return response.data;
 });
 
-
 export const deleteRoomCardsThunk = createAsyncThunk("deleteroom", async (id) => {
   await axios.delete(`http://localhost:8800/room/${id}`);
   return id;
@@ -35,8 +34,8 @@ export const reserveRoomThunk = createAsyncThunk(
       reservationData,
       {
         headers: {
-          Authorization: `Bearer ${token}`, 
-          "Content-Type": "application/json", 
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
         },
       }
     );
@@ -45,10 +44,14 @@ export const reserveRoomThunk = createAsyncThunk(
 );
 
 
-export const cancelReservationThunk = createAsyncThunk("cancelreservation", async (reservationId) => {
-  await axios.delete(`http://localhost:8800/reservations/${reservationId}`);
-  return reservationId;
+export const deleteReservationThunk = createAsyncThunk("deletereservation", async (roomId) => {
+  await axios.delete(`http://localhost:8800/room/${roomId}/reservationId`);
+  return roomId;
+
+
 });
+
+
 
 export const getUserReservationsThunk = createAsyncThunk(
   "getuserreservations",
@@ -58,13 +61,14 @@ export const getUserReservationsThunk = createAsyncThunk(
       `http://localhost:8800/room/reservations/${userId}`,
       {
         headers: {
-          Authorization: `Bearer ${token}`, 
+          Authorization: `Bearer ${token}`,
         },
       }
     );
     return response.data;
   }
 );
+
 
 export const roomCardSlice = createSlice({
   name: "room",
@@ -88,17 +92,23 @@ export const roomCardSlice = createSlice({
         state.reservedRooms = action.payload;
       })
       .addCase(reserveRoomThunk.fulfilled, (state, action) => {
-        const { roomId, reservationId } = action.payload; 
+        const { roomId, reservationId } = action.payload;
         state.reservedRooms.push({ ...action.payload, roomId });
         state.room = state.room.map((room) =>
           room._id === roomId ? { ...room, isReserved: true } : room
         );
       })
-      .addCase(cancelReservationThunk.fulfilled, (state, action) => {
+    
+      .addCase(deleteReservationThunk.fulfilled, (state, action) => {
+  
         state.reservedRooms = state.reservedRooms.filter((room) => room._id !== action.payload);
+       
+        state.room = state.room.map((room) =>
+          room._id === action.payload ? { ...room, isReserved: false } : room
+        );
       })
       .addCase(getUserReservationsThunk.fulfilled, (state, action) => {
-        state.userReservations = action.payload; 
+        state.userReservations = action.payload;
       });
   },
 });

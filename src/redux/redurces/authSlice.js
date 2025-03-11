@@ -1,23 +1,24 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// Qeydiyyat üçün Thunk
+// Qeydiyyat Thunk
 export const registerThunk = createAsyncThunk(
-    "auth/register",
-    async (data, { rejectWithValue }) => {
-      try {
-        const response = await axios.post(
-          "http://localhost:8800/auth/register",
-          data
-        );
-        return response.data;
-      } catch (error) {
-        console.error("Backend xəta mesajı:", error.response?.data); // Xəta mesajını konsola yaz
-        return rejectWithValue(error.response?.data || { message: "Xəta baş verdi" });
-      }
+  "auth/register",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8800/auth/register",
+        data
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Backend xəta mesajı:", error.response?.data);
+      return rejectWithValue(error.response?.data || { message: "Qeydiyyat xətası baş verdi" });
     }
-  );
-// Login üçün Thunk
+  }
+);
+
+// Login Thunk
 export const loginThunk = createAsyncThunk(
   "auth/login",
   async (data, { rejectWithValue }) => {
@@ -30,19 +31,19 @@ export const loginThunk = createAsyncThunk(
         },
         {
           headers: {
-            "Content-Type": "application/json", // JSON formatında məlumat göndər
+            "Content-Type": "application/json",
           },
         }
       );
 
       if (response.data._id) {
-        return response.data; // Uğurlu cavab
+        return response.data;
       } else {
-        return rejectWithValue(response.data); // Xəta mesajı
+        return rejectWithValue(response.data);
       }
     } catch (error) {
-      console.error("Backend xəta mesajı:", error.response?.data); // Xəta mesajını konsola yaz
-      return rejectWithValue(error.response?.data || { message: "Xəta baş verdi" });
+      console.error("Backend xəta mesajı:", error.response?.data);
+      return rejectWithValue(error.response?.data || { message: "Daxil olmaq mümkün olmadı" });
     }
   }
 );
@@ -51,22 +52,21 @@ export const loginThunk = createAsyncThunk(
 export const authSlice = createSlice({
   name: "auth",
   initialState: {
-    user: null,
+    user: JSON.parse(localStorage.getItem("user")) || null, // localStorage-dən oxu
     isFetching: false,
     isError: false,
     errorMessage: "",
   },
   reducers: {
-    // Logout üçün reducer
     logout: (state) => {
       state.user = null;
       state.isError = false;
       state.errorMessage = "";
+      localStorage.removeItem("user"); // Çıxış edəndə localStorage-dən sil
     },
   },
   extraReducers: (builder) => {
     builder
-      // Register Thunk üçün hallar
       .addCase(registerThunk.pending, (state) => {
         state.isFetching = true;
         state.isError = false;
@@ -77,14 +77,13 @@ export const authSlice = createSlice({
         state.user = action.payload;
         state.isError = false;
         state.errorMessage = "";
+        localStorage.setItem("user", JSON.stringify(action.payload)); // localStorage-ə yaz
       })
       .addCase(registerThunk.rejected, (state, action) => {
         state.isFetching = false;
         state.isError = true;
         state.errorMessage = action.payload?.message || "Qeydiyyat zamanı xəta baş verdi";
       })
-
-      // Login Thunk üçün hallar
       .addCase(loginThunk.pending, (state) => {
         state.isFetching = true;
         state.isError = false;
@@ -95,6 +94,7 @@ export const authSlice = createSlice({
         state.user = action.payload;
         state.isError = false;
         state.errorMessage = "";
+        localStorage.setItem("user", JSON.stringify(action.payload)); // localStorage-ə yaz
       })
       .addCase(loginThunk.rejected, (state, action) => {
         state.isFetching = false;
@@ -105,7 +105,5 @@ export const authSlice = createSlice({
   },
 });
 
-// Logout action export edirik
 export const { logout } = authSlice.actions;
-
 export default authSlice.reducer;
