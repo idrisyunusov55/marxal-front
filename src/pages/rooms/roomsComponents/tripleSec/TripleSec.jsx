@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import styles from './TripleSec.module.scss'
 import { getTripleThunk } from '../../../../redux/redurces/tripleSlice'
 import { useNavigate } from 'react-router-dom'
+import { useTheme } from '../../../context/context'
 
 const TripleSec = () => {
     const dispatch = useDispatch()
@@ -17,6 +18,8 @@ const TripleSec = () => {
     const goReservation = () => {
       navigation('/reservation')
     }
+
+    const {theme} = useTheme()
   return (
     
     <div className={styles.container}>
@@ -29,7 +32,10 @@ const TripleSec = () => {
            <img  src={item.fourthPhoto} alt="" />
        </div>
    })}
-      <div className={styles.rbtns}>
+      <div  style={{
+      backgroundColor: theme === 'light' ? 'white' : 'black',
+      color: theme === 'light' ? 'black' : 'white',
+    }} className={styles.rbtns}>
    <button onClick={goReservation} className={styles.rbtn}>Rezevasiya</button>
    </div>
 </div>

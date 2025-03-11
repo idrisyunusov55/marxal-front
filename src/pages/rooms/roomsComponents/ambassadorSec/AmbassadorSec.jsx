@@ -3,8 +3,12 @@ import styles from './AmbassadorSec.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAmbassadorThunk } from '../../../../redux/redurces/ambassadorSlice'
 import { useNavigate } from 'react-router-dom'
+import { useTheme } from '../../../context/context'
 
 const AmbassadorSec = () => {
+     
+    const {theme} = useTheme()
+
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -28,8 +32,11 @@ const AmbassadorSec = () => {
            <img  src={item.fourthPhoto} alt="" />
        </div>
    })}
-      <div className={styles.rbtns}>
-   <button onClick={goReservation} className={styles.rbtn}>Rezevasiya</button>
+      <div  style={{
+      backgroundColor: theme === 'light' ? 'white' : 'black',
+      color: theme === 'light' ? 'black' : 'white',
+    }} className={styles.rbtns}>
+   <button  onClick={goReservation} className={styles.rbtn}>Rezevasiya</button>
    </div>
 </div>
   )

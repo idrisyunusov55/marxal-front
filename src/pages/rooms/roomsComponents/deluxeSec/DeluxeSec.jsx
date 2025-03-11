@@ -3,6 +3,7 @@ import styles from './DeluxeSec.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { getDeluxeThunk } from '../../../../redux/redurces/deluxeSlice'
 import { useNavigate } from 'react-router-dom'
+import { useTheme } from '../../../context/context'
 
 const DeluxeSec = () => {
     const dispatch = useDispatch()
@@ -17,6 +18,8 @@ const DeluxeSec = () => {
     const goReservation = () => {
       navigation('/reservation')
     }
+
+    const {theme} = useTheme()
   return (
     <div className={styles.container}>
     <h1>DELUXE SUITE</h1>
@@ -28,7 +31,10 @@ const DeluxeSec = () => {
            <img  src={item.fourthPhoto} alt="" />
        </div>
    })}
-      <div className={styles.rbtns}>
+      <div  style={{
+      backgroundColor: theme === 'light' ? 'white' : 'black',
+      color: theme === 'light' ? 'black' : 'white',
+    }} className={styles.rbtns}>
    <button onClick={goReservation} className={styles.rbtn}>Rezevasiya</button>
    </div>
 </div>

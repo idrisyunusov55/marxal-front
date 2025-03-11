@@ -11,6 +11,7 @@ import Footer from "../../../components/footer/Footer";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from "../../context/context";
 
 const MAX_GUESTS = 11;
 const MAX_ROOMS = 2;
@@ -123,12 +124,23 @@ const RoomCardsSec = () => {
     navigate("/detail", { state: { room } });
   };
 
+  const {theme} = useTheme()
+
   return (
     <>
       <Header />
-      <div className={styles.main}>
-        <div className={styles.container}>
-          <div className={styles.datePickerContainer}>
+      <div  style={{
+      backgroundColor: theme === 'light' ? 'white' : 'black',
+      color: theme === 'light' ? 'black' : 'white',
+    }} className={styles.main}>
+        <div  style={{
+      backgroundColor: theme === 'light' ? 'white' : 'black',
+      color: theme === 'light' ? 'black' : 'white',
+    }} className={styles.container}>
+          <div  style={{
+      backgroundColor: theme === 'light' ? 'white' : 'black',
+      color: theme === 'light' ? 'black' : 'white',
+    }} className={styles.datePickerContainer}>
             <DatePicker
               selectsRange={true}
               startDate={startDate}
@@ -139,7 +151,10 @@ const RoomCardsSec = () => {
               className={styles.datePicker}
             />
           </div>
-          <div className={styles.roomsContainer}>
+          <div  style={{
+      backgroundColor: theme === 'light' ? 'white' : 'black',
+      color: theme === 'light' ? 'black' : 'white',
+    }} className={styles.roomsContainer}>
             {rooms.map((room) => (
               <motion.div
                 key={room.id}
@@ -148,17 +163,29 @@ const RoomCardsSec = () => {
                 animate={{ opacity: 1, y: 0 }}
               >
                 <h4 className={styles.roomTitle}>Nömrə {room.id}</h4>
-                <div className={styles.counterContainer}>
+                <div  style={{
+      backgroundColor: theme === 'light' ? 'white' : 'black',
+      color: theme === 'light' ? 'black' : 'white',
+    }} className={styles.counterContainer}>
                   <span>Böyüklər:</span>
-                  <div className={styles.counter}>
+                  <div  style={{
+      backgroundColor: theme === 'light' ? 'white' : 'black',
+      color: theme === 'light' ? 'black' : 'white',
+    }} className={styles.counter}>
                     <button onClick={() => handleGuestChange(room.id, "adults", -1)}>-</button>
                     <span>{room.adults}</span>
                     <button onClick={() => handleGuestChange(room.id, "adults", 1)}>+</button>
                   </div>
                 </div>
-                <div className={styles.counterContainer}>
+                <div  style={{
+      backgroundColor: theme === 'light' ? 'white' : 'black',
+      color: theme === 'light' ? 'black' : 'white',
+    }} className={styles.counterContainer}>
                   <span>Uşaqlar:</span>
-                  <div className={styles.counter}>
+                  <div  style={{
+      backgroundColor: theme === 'light' ? 'white' : 'black',
+      color: theme === 'light' ? 'black' : 'white',
+    }} className={styles.counter}>
                     <button onClick={() => handleGuestChange(room.id, "children", -1)}>-</button>
                     <span>{room.children}</span>
                     <button onClick={() => handleGuestChange(room.id, "children", 1)}>+</button>
@@ -173,7 +200,10 @@ const RoomCardsSec = () => {
             ))}
           </div>
         </div>
-        <div className={styles.cards}>
+        <div  style={{
+      backgroundColor: theme === 'light' ? 'white' : 'black',
+      color: theme === 'light' ? 'black' : 'white',
+    }} className={styles.cards}>
           {filteredRooms.map((item) => (
             <div key={item._id} className={styles.card } >
               <Carousel showThumbs={false} dynamicHeight={true} >
@@ -181,7 +211,10 @@ const RoomCardsSec = () => {
                 <div><img src={item.secondPhoto} alt={item.name} /></div>
                 <div><img src={item.thirdPhoto} alt={item.name} /></div>
               </Carousel>
-              <div className={styles.info}>
+              <div  style={{
+      backgroundColor: theme === 'light' ? 'white' : 'black',
+      color: theme === 'light' ? 'black' : 'white',
+    }} className={styles.info}>
                 <h5 onClick={() => handleDetailClick(item)} style={{cursor:"pointer"}}>{item.name}</h5>
                 <p>{item.maxPeople} qonaq</p>
                 <p>{item.price} AZN / gecə</p>

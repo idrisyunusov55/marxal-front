@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getMediumVillaThunk } from '../../../../redux/redurces/mediumVilla'
 import styles from './MediumVillaSec.module.scss'
 import { useNavigate } from 'react-router-dom'
+import { useTheme } from '../../../context/context'
 
 const MediumVillaSec = () => {
     const dispatch = useDispatch()
@@ -17,6 +18,8 @@ const MediumVillaSec = () => {
     const goReservation = () => {
       navigation('/reservation')
     }
+
+    const {theme} = useTheme()
   return (
     <div className={styles.container}>
     <h1>MEDIUM SIZE VILLA</h1>
@@ -28,7 +31,10 @@ const MediumVillaSec = () => {
            <img  src={item.fourthPhoto} alt="" />
        </div>
    })}
-      <div className={styles.rbtns}>
+      <div  style={{
+      backgroundColor: theme === 'light' ? 'white' : 'black',
+      color: theme === 'light' ? 'black' : 'white',
+    }} className={styles.rbtns}>
    <button onClick={goReservation} className={styles.rbtn}>Rezevasiya</button>
    </div>
 </div>

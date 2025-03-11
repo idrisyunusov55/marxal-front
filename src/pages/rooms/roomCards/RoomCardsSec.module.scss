@@ -17,6 +17,7 @@
 .datePickerContainer {
   display: flex;
   justify-content: center;
+  background-color: transparent;
 }
 
 .datePicker {
@@ -25,7 +26,7 @@
   border-radius: 4px;
   width: 100%;
   max-width: 300px;
-  background-color: #000; /* Qara fon */
+  background-color: transparent;
   color: #ffd700; /* Qızılı rəng */
 }
 
@@ -39,7 +40,7 @@
   border: 1px solid #ffd700; /* Qızılı çərçivə */
   border-radius: 8px;
   padding: 15px;
-  background-color: #1a1a1a; /* Tünd qara fon */
+  background-color: transparent;
   color: #ffd700; /* Qızılı rəng */
 }
 
@@ -248,10 +249,12 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 5px;
+    background-color: transparent;
   }
 
   .counter {
     gap: 5px;
+    background-color: transparent;
 
     button {
       padding: 4px 8px;

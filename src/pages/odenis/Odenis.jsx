@@ -5,6 +5,7 @@ import { getUserReservationsThunk, deleteReservationThunk } from "../../redux/re
 import styles from './Odenis.module.scss' 
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
+import { useTheme } from "../context/context";
 
 const Odenis = () => {
   const location = useLocation();
@@ -44,20 +45,44 @@ const Odenis = () => {
     alert(`Rezervasiya ${reservationId} uğurla təsdiqləndi.`);
   };
 
+
+  const {theme} = useTheme()
+
   return (
     <>
       <Header/>
-      <div className={styles.odenisContainer}>
+      <div  style={{
+      backgroundColor: theme === 'light' ? 'white' : 'black',
+      color: theme === 'light' ? 'black' : 'white',
+    }} className={styles.odenisContainer}>
         <h1 className={styles.odenisTitle}>Ödəniş Səhifəsi</h1>
         {reservations.length > 0 ? (
-          <ul className={styles.reservationsList}>
+          < ul  style={{
+            backgroundColor: theme === 'light' ? 'white' : 'black',
+            color: theme === 'light' ? 'black' : 'white',
+          }} className={styles.reservationsList}>
             {reservations.map((room) => (
               <li key={room._id} className={styles.reservationItem}>
-                <h3 className={styles.roomName}>{room.name}</h3>
-                <p className={styles.roomPrice}>Qiymət: {room.totalPrice} AZN</p>
-                <p className={styles.roomDate}>Giriş Tarixi: {room.checkIn}</p>
-                <p className={styles.roomDate}>Çıxış Tarixi: {room.checkOut}</p>
-                <div className={styles.buttonContainer}>
+                <h3  style={{
+      backgroundColor: theme === 'light' ? 'white' : 'black',
+      color: theme === 'light' ? 'black' : 'white',
+    }} className={styles.roomName}>{room.name}</h3>
+                <p  style={{
+      backgroundColor: theme === 'light' ? 'white' : 'black',
+      color: theme === 'light' ? 'black' : 'white',
+    }} className={styles.roomPrice}>Qiymət: {room.totalPrice} AZN</p>
+                <p  style={{
+      backgroundColor: theme === 'light' ? 'white' : 'black',
+      color: theme === 'light' ? 'black' : 'white',
+    }} className={styles.roomDate}>Giriş Tarixi: {room.checkIn}</p>
+                <p  style={{
+      backgroundColor: theme === 'light' ? 'white' : 'black',
+      color: theme === 'light' ? 'black' : 'white',
+    }} className={styles.roomDate}>Çıxış Tarixi: {room.checkOut}</p>
+                <div  style={{
+      backgroundColor: theme === 'light' ? 'white' : 'black',
+      color: theme === 'light' ? 'black' : 'white',
+    }} className={styles.buttonContainer}>
                   <button
                     className={styles.cancelButton}
                     onClick={() => handleCancelReservation(room._id)}

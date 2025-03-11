@@ -3,6 +3,7 @@ import styles from './RoyalSec.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { getRoyalThunk } from '../../../../redux/redurces/royalSlice'
 import { useNavigate } from 'react-router-dom'
+import { useTheme } from '../../../context/context'
 
 const RoyalSec = () => {
     const dispatch = useDispatch()
@@ -17,6 +18,8 @@ const RoyalSec = () => {
     const goReservation = () => {
       navigation('/reservation')
     }
+
+    const {theme} = useTheme()
   return (
     <div className={styles.container}>
     <h1>ROYAL SUITE</h1>
@@ -28,7 +31,10 @@ const RoyalSec = () => {
            <img  src={item.fourthPhoto} alt="" />
        </div>
    })}
-      <div className={styles.rbtns}>
+      <div  style={{
+      backgroundColor: theme === 'light' ? 'white' : 'black',
+      color: theme === 'light' ? 'black' : 'white',
+    }} className={styles.rbtns}>
    <button onClick={goReservation} className={styles.rbtn}>Rezevasiya</button>
    </div>
 </div>

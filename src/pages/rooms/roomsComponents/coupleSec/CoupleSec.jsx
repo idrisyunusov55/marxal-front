@@ -3,8 +3,13 @@ import styles from './CoupleSec.module.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCoupleThunk } from '../../../../redux/redurces/coupleSlice'
 import { useNavigate } from 'react-router-dom'
+import { useTheme } from '../../../context/context'
 
 const CoupleSec = () => {
+
+    const {theme} = useTheme()
+
+
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -28,7 +33,10 @@ const CoupleSec = () => {
            <img  src={item.fourthPhoto} alt="" />
        </div>
    })}
-      <div className={styles.rbtns}>
+      <div  style={{
+      backgroundColor: theme === 'light' ? 'white' : 'black',
+      color: theme === 'light' ? 'black' : 'white',
+    }} className={styles.rbtns}>
    <button onClick={goReservation} className={styles.rbtn}>Rezevasiya</button>
    </div>
 </div>

@@ -1,11 +1,22 @@
 import React from 'react'
 import styles from './Information.module.scss'
+import { useTheme } from '../../pages/context/context'
 
 const InformationSec = () => {
+   const { theme } = useTheme()
   return (
-    <section className={styles.container}>
-        <div className={styles.informatinCard}>
-    <div className={styles.imageWrapper}>
+    <section  style={{
+      backgroundColor: theme === 'light' ? 'white' : 'black',
+      color: theme === 'light' ? 'black' : 'white',
+    }} className={styles.container}>
+        <div  style={{
+    backgroundColor: theme === 'light' ? 'white' : 'black',
+    color: theme === 'light' ? 'black' : 'white',
+  }} className={styles.informatinCard}>
+    <div  style={{
+    backgroundColor: theme === 'light' ? 'white' : 'black',
+    color: theme === 'light' ? 'black' : 'white',
+  }} className={styles.imageWrapper}>
       <img
         src="https://www.marxalresort.az/assets/images/2m8a0676-1264x842.jpg"
         alt="Hotel Lobby"
@@ -13,7 +24,10 @@ const InformationSec = () => {
       />
     </div>
     
-    <div className={styles.textWrapper}>
+    <div  style={{
+    backgroundColor: theme === 'light' ? 'white' : 'black',
+    color: theme === 'light' ? 'black' : 'white',
+  }} className={styles.textWrapper}>
       <h2 className={styles.title}>
         İstirahət Kompleksimizə xoş gəlmişsiniz
       </h2>
@@ -27,8 +41,14 @@ const InformationSec = () => {
       </button>
     </div>
     </div>
-    <div className={styles.informatinCard}>
-    <div className={styles.imageWrapper}>
+    <div  style={{
+    backgroundColor: theme === 'light' ? 'white' : 'black',
+    color: theme === 'light' ? 'black' : 'white',
+  }} className={styles.informatinCard}>
+    <div  style={{
+    backgroundColor: theme === 'light' ? 'white' : 'black',
+    color: theme === 'light' ? 'black' : 'white',
+  }} className={styles.imageWrapper}>
       <img
         src="https://www.marxalresort.az/assets/images/9s7a5808-1264x842.jpg"
         alt="Hotel Lobby"
@@ -36,7 +56,10 @@ const InformationSec = () => {
       />
     </div>
     
-    <div className={styles.textWrapper}>
+    <div  style={{
+    backgroundColor: theme === 'light' ? 'white' : 'black',
+    color: theme === 'light' ? 'black' : 'white',
+  }} className={styles.textWrapper}>
       <h2 className={styles.title}>
       Otaqlar
       </h2>
@@ -48,8 +71,14 @@ const InformationSec = () => {
       </button>
     </div>
     </div>
-    <div className={styles.informatinCard}>
-    <div className={styles.imageWrapper}>
+    <div  style={{
+    backgroundColor: theme === 'light' ? 'white' : 'black',
+    color: theme === 'light' ? 'black' : 'white',
+  }} className={styles.informatinCard}>
+    <div  style={{
+    backgroundColor: theme === 'light' ? 'white' : 'black',
+    color: theme === 'light' ? 'black' : 'white',
+  }} className={styles.imageWrapper}>
       <img
         src="https://www.marxalresort.az/assets/images/esas-2.jpg"
         alt="Hotel Lobby"
@@ -57,7 +86,10 @@ const InformationSec = () => {
       />
     </div>
     
-    <div className={styles.textWrapper}>
+    <div  style={{
+    backgroundColor: theme === 'light' ? 'white' : 'black',
+    color: theme === 'light' ? 'black' : 'white',
+  }} className={styles.textWrapper}>
       <h2 className={styles.title}>
       Bar və Restoranlar
       </h2>
@@ -69,8 +101,14 @@ const InformationSec = () => {
       </button>
     </div>
     </div>
-    <div className={styles.informatinCard}>
-    <div className={styles.imageWrapper}>
+    <div  style={{
+    backgroundColor: theme === 'light' ? 'white' : 'black',
+    color: theme === 'light' ? 'black' : 'white',
+  }} className={styles.informatinCard}>
+    <div  style={{
+    backgroundColor: theme === 'light' ? 'white' : 'black',
+    color: theme === 'light' ? 'black' : 'white',
+  }} className={styles.imageWrapper}>
       <img
         src="https://www.marxalresort.az/assets/images/1280x860-1280x860.jpg"
         alt="Hotel Lobby"
@@ -78,7 +116,10 @@ const InformationSec = () => {
       />
     </div>
     
-    <div className={styles.textWrapper}>
+    <div  style={{
+    backgroundColor: theme === 'light' ? 'white' : 'black',
+    color: theme === 'light' ? 'black' : 'white',
+  }} className={styles.textWrapper}>
       <h2 className={styles.title}>
       Sağlamlıq və Spa
 
@@ -93,8 +134,14 @@ const InformationSec = () => {
       </button>
     </div>
     </div>
-    <div className={styles.informatinCard}>
-    <div className={styles.imageWrapper}>
+    <div  style={{
+    backgroundColor: theme === 'light' ? 'white' : 'black',
+    color: theme === 'light' ? 'black' : 'white',
+  }} className={styles.informatinCard}>
+    <div  style={{
+    backgroundColor: theme === 'light' ? 'white' : 'black',
+    color: theme === 'light' ? 'black' : 'white',
+  }} className={styles.imageWrapper}>
       <img
         src="https://www.marxalresort.az/assets/images/800x533-800x533.jpg"
         alt="Hotel Lobby"
@@ -114,8 +161,14 @@ const InformationSec = () => {
       </button>
     </div>
     </div>
-    <div className={styles.informatinCard}>
-    <div className={styles.imageWrapper}>
+    <div  style={{
+    backgroundColor: theme === 'light' ? 'white' : 'black',
+    color: theme === 'light' ? 'black' : 'white',
+  }} className={styles.informatinCard}>
+    <div  style={{
+    backgroundColor: theme === 'light' ? 'white' : 'black',
+    color: theme === 'light' ? 'black' : 'white',
+  }} className={styles.imageWrapper}>
       <img
         src="https://www.marxalresort.az/assets/images/443a9485-1264x842.jpg"
         alt="Hotel Lobby"
@@ -123,7 +176,10 @@ const InformationSec = () => {
       />
     </div>
     
-    <div className={styles.textWrapper}>
+    <div  style={{
+    backgroundColor: theme === 'light' ? 'white' : 'black',
+    color: theme === 'light' ? 'black' : 'white',
+  }} className={styles.textWrapper}>
       <h2 className={styles.title}>
       Konfranslar və Tədbirlər
       </h2>
